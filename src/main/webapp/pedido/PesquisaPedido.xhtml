@@ -1,0 +1,85 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Pedido</ui:define>
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Pesquisa Pedido</h1>
+
+			<p:toolbar style="margin-top:10px">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" id="botaoSalvar" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/pedido/CadastroPedido" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="margin-top:10px;width:100%" columnClasses="rotulo,canpo">
+				<p:outputLabel value="Número" />
+				<h:panelGroup>
+					<p:inputText size="10" />
+				a
+				<p:inputText size="10" />
+				</h:panelGroup>
+				<p:outputLabel value="Data de criacão" />
+				<h:panelGroup>
+					<p:calendar size="10" pattern="dd/MM/yyyy" />
+				a
+				<p:calendar size="10" pattern="dd/MM/yyyy" />
+				</h:panelGroup>
+				<p:outputLabel value="Cliente" for="cliente" />
+				<p:inputText id="cliente" size="60" maxlength="60" />
+
+				<p:outputLabel value="Vendedor" for="vendedor" />
+				<p:inputText id="vendedor" size="60" maxlength="60" />
+
+				<p:outputLabel value="Status" />
+				<p:selectManyCheckbox>
+
+					<f:selectItem itemLabel="Orcamento" />
+					<f:selectItem itemLabel="Emetido" />
+					<f:selectItem itemLabel="Cancelado" />
+
+				</p:selectManyCheckbox>
+			</p:panelGrid>
+			<p:dataTable id="pedidoTable" value="#{pesquisaPedidoBean.produtosFiltrados}" var="pedido"
+				rows="20" paginator="True" paginatorAlwaysVisible="false"
+				emptyMessage="Nenhum produto encontrado." paginatorPosition="bottom" style="margin-top:20px">
+
+				<p:column headerText="Numero" style="text-align:center; width:140">
+					<h:outputLabel value="123" />
+				</p:column>
+
+				<p:column headerText="Clientes">
+					<h:outputLabel value="Supermercado Twingo" />
+				</p:column>
+
+				<p:column headerText="Vendedor">
+					<h:outputLabel value="Nelio Simiao" />
+				</p:column>
+
+				<p:column headerText="Data de criacao">
+					<h:outputLabel value="19/12/2016" />
+				</p:column>
+
+				<p:column headerText="Valor Total">
+					<h:outputLabel value="1200.00Mt" />
+				</p:column>
+
+				<p:column style="text-align:center;widht:100px">
+					
+					<p:button icon="ui-icon-pencil" title="Editar"/>
+				</p:column>
+
+			</p:dataTable>
+			
+		</h:form>
+	</ui:define>
+
+</ui:composition>

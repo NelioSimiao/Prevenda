@@ -1,0 +1,62 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa Cliente</ui:define>
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Pesquisa Cliente</h1>
+
+			<p:toolbar style="margin-top:10px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" id="botaoPesquisa" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/cliente/CadastroCliente" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="margin-top:10px;width:100%" columnClasses="rotulo,canpo">
+				
+				<p:outputLabel value="CPF/CNPJ" for="cpf"/>
+				<p:inputText id="cpf" />
+				
+				
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" />
+				
+			</p:panelGrid>
+			<p:dataTable id="pedidoTable"
+				value="#{pesquisaClienteBean.clientes}" var="cliente"
+				rows="20" paginator="True" paginatorAlwaysVisible="false"
+				emptyMessage="Nenhum cliente encontrado." paginatorPosition="bottom"
+				style="margin-top:20px">
+
+				<p:column headerText="Nome" style="text-align:left">
+					<h:outputLabel value="Nélio Simião Muchisse" />
+				</p:column>
+				
+				<p:column headerText="Tipo" style="text-align:left; width:100px">
+					<h:outputLabel value="Juridico" />
+				</p:column>
+				
+					
+				<p:column headerText="CPF/CNPJ" style="text-align:left; width:100px">
+					<h:outputLabel value="173.2222.98" />
+				</p:column >
+				
+				<p:column style="text-align:left; width:100px" >
+				<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"/>
+				</p:column>
+				
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

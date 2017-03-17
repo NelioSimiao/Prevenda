@@ -1,0 +1,76 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+
+	<ui:define name="titulo">Pesquisa Usuario</ui:define>
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Pesquisa Usuario</h1>
+
+			<p:toolbar style="margin-top:10px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaUsuarioBean.pesquisar}" id="botaoPesquisa"
+						update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="novo" outcome="/usuario/CadastroUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+
+
+			<p:panelGrid columns="2" id="painel"
+				style="margin-top:10px;width:100%" columnClasses="rotulo,canpo">
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60"
+					value="#{pesquisaUsuarioBean.filtro.nome}" />
+
+			</p:panelGrid>
+			<p:dataTable id="pesquisaUsuarioTable"
+				value="#{pesquisaUsuarioBean.usuariosFiltrados}" var="usuario"
+				rows="20" paginator="True" paginatorAlwaysVisible="false"
+				emptyMessage="Nenhum cliente encontrado." paginatorPosition="bottom"
+				style="margin-top:20px">
+
+				<p:column headerText="Nome" style="text-align:left">
+					<h:outputLabel value="#{usuario.nome}" />
+				</p:column>
+
+				<p:column headerText="E-mail" style="text-align:left; width:140px">
+					<h:outputLabel value="#{usuario.email}" />
+				</p:column>
+
+				<p:column style="text-align:left; width:100px">
+					<p:button outcome="/usuario/CadastroUsuario" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="usuario" value="#{usuario.id}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('ExclusaoUsuario').show()" />
+				</p:column>
+
+			</p:dataTable>
+			<p:confirmDialog header="Exclusão usuário"
+				message="Tem certeza que deseja excluir o usuario?"
+				widgetVar="ExclusaoUsuario">
+
+				<p:button value="Não"
+				
+					onclick="PF('ExclusaoUsuario').hide(); return false" />
+				<p:commandButton value="Sim"
+					oncomplete="PF('ExclusaoUsuario').hide()" />
+
+			</p:confirmDialog>
+
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

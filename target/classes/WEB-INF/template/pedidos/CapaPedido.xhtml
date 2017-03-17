@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<p:panelGrid columns="4" style="width:100%; margin-top:20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+		<p:outputLabel value="Número" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.id}" />
+
+		<p:outputLabel value="Data de criacão" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.datacriacao}">
+			<f:convertDateTime pattern="dd/MM/yyyy" />
+		</h:outputText>
+
+		<p:outputLabel value="Status" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.statusPedido}" />
+
+		<p:outputLabel value="Vendedor" for="vendedor" />
+		<p:selectOneMenu id="vendedor"
+			value="#{cadastroPedidoBean.pedido.vendedor}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItem itemLabel="João das Couves Dores" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Cliente" for="cliente" />
+		<p:autoComplete id="cliente" size="40" dropdown="true"
+			value="#{cadastroPedidoBean.pedido.cliente}" />
+
+		<p:outputLabel value="Forma de pagamento" for="formapagamento" />
+		<p:selectOneMenu id="formapagamento"
+			value="#{cadastroPedidoBean.pedido.formaPagamento}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItem itemLabel="Cartão de Crédito" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Valor de frete" for="valorDeFrente" />
+		<h:inputText id="valorDeFrente" size="10" maxlength="10"
+			value="#{cadastroPedidoBean.pedido.valorFrete}" styleClass="moeda">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+			</h:inputText>
+
+		<p:outputLabel value="Subtotal" style="font-weight:bold"
+			for="subtotal" />
+		<h:outputText value="O.OO MTn" style="font-weight:bold" id="subtotal" />
+
+
+		<p:outputLabel value="Valor de desconto" for="valorDeDesconto" />
+		<h:inputText id="valorDeDesconto" size="10" maxlength="10"
+			value="#{cadastroPedidoBean.pedido.valorDesconto}" styleClass="moeda">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+		</h:inputText>
+
+		<p:outputLabel value="Total" style="font-weight:bold;font-size:1.2em"
+			for="total" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.valorTotal}"
+			style="font-weight:bold;font-size:1.2em" id="total">
+			<f:convertNumber type="currency" />
+		</h:outputText>
+
+
+
+
+
+
+	</p:panelGrid>
+
+</ui:composition>

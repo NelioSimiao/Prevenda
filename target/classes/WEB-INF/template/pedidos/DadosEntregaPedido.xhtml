@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<p:panelGrid columns="4"  style="widht: 100%">
+	<p:outputLabel value="Data da  Entrega" for="dataentrega"/>
+	<p:calendar pattern="dd/MM/yyyy" id="dataentrega" size="10" value="#{cadastroPedidoBean.pedido.dataEntrega}"/>
+	
+	<p:spacer/>
+	<p:spacer/>
+	<p:outputLabel value="Logradouro" for="logradouro"/>
+	<p:inputText id="logradouro" size="50" value="#{cadastroPedidoBean.pedido.enderecoEntrega.logradouro}"/>
+	<p:outputLabel value="Número" for="numero"/>
+	<p:inputText id="numero" size="10" value="#{cadastroPedidoBean.pedido.enderecoEntrega.numero}"/>
+	<p:outputLabel value="Complemento" for="complemento"/>
+	<p:inputText id="complemento" size="50" value="#{cadastroPedidoBean.pedido.enderecoEntrega.complemento}"/>
+	
+	
+	<p:outputLabel value="Cidade" for="cidade"/>
+	<p:inputText id="cidade" size="10" value="#{cadastroPedidoBean.pedido.enderecoEntrega.cidade}"/>
+	
+	<p:outputLabel value="estado" for="estado"/>
+	<p:inputText id="estado" size="20" value="#{cadastroPedidoBean.pedido.enderecoEntrega.uf}"/>
+	
+	<p:outputLabel value="CPE" for="cpe"/>
+	<p:inputText id="cpe" size="10" value="#{cadastroPedidoBean.pedido.enderecoEntrega.cep}"/>
+	
+	
+	
+	
+	
+	
+	
+	</p:panelGrid>
+
+
+</ui:composition>

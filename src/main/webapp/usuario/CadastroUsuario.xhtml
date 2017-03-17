@@ -1,0 +1,74 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+
+	<ui:define name="titulo">Cadastro Usuario</ui:define>
+	<ui:define name="corpo">
+
+		<f:metadata>
+		<o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}"/>
+			<f:event listener="#{cadastroUsuarioBean.inicializar}"
+				type="preRenderView" />
+		</f:metadata>
+		<h:form>
+			<h1>Novo Usúario</h1>
+			<p:messages autoUpdate="true" closable="true" />
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/usuario/CadastroUsuario" />
+					<p:commandButton value="Salvar" for="botaoSalvar"
+						action="#{cadastroUsuarioBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar" for="botaoPesquisar"
+						outcome="/usuario/PesquisaUsuario" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" style="margin-top:10px;width:100%"
+				columnClasses="rotulo,canpo">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="40" maxlength="40"
+					value="#{cadastroUsuarioBean.usuario.nome}" />
+
+				<p:outputLabel value="Email" for="email" />
+				<p:inputText id="email" size="40" maxlength="40"
+					value="#{cadastroUsuarioBean.usuario.email}" />
+
+
+				<p:outputLabel value="Password" for="password" />
+				<p:password id="password"
+					value="#{cadastroUsuarioBean.usuario.senha}" />
+
+				<p:selectOneMenu value="#{cadastroUsuarioBean.p}">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{cadastroUsuarioBean.grupo}" var="grupo"
+						itemValue="#{grupo}" itemLabel="#{grupo.nome}" />
+				</p:selectOneMenu>
+				
+				
+				<p:commandButton value="Adicionar Grupo" action="#{cadastroUsuarioBean.adicionarAogrupo}"/>
+			</p:panelGrid>
+			<p:dataTable value="#{cadastroUsuarioBean.grupo}" var="grupo"
+				emptyMessage="Nebhum grupo adicionado." rows="20" paginator="true"
+				paginatorAlwaysVisible="false" style="margin-top:20px">
+
+				<p:column headerText="Grupos">
+					<h:outputLabel value="#{grupo.nome}" />
+				</p:column>
+
+				<p:column style="text-align:center; width:100px">
+					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				</p:column>
+
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
